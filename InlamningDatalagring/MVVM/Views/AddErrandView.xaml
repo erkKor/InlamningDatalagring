@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="InlamningDatalagring.MVVM.Views.AddErrandView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InlamningDatalagring.MVVM.Views"
+             xmlns:viewmodels="clr-namespace:InlamningDatalagring.MVVM.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:AddErrandViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="5 0 0 10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="{Binding PageTitle}" FontSize="22" FontWeight="Medium" Margin="0 0 0 20"/>
+
+        <StackPanel Grid.Row="2">
+            <TextBlock Text="Skriv in förnamn..." />
+            <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding FirstNameText}"/>
+            <TextBlock Text="Skriv in efternamn..." />
+            <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding LastNameText}"/>
+            <TextBlock Text="Skriv in e-postadress..." />
+            <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding EmailText}"/>
+            <TextBlock Text="Skriv in telefonnummer..." />
+            <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding PhonenumberText}"/>
+            <TextBlock Text="Skriv in adress..." />
+            <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding AdressText}"/>
+            <Button Content="Lägg till kontakt" Margin="0 5 15 10" Padding="8" />
+        </StackPanel>
+    </Grid>
+</UserControl>
