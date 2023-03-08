@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Grid.Column="0">
-            <Button Command="{Binding GoToAddContactCommand}" Content="&#xf234;" Style="{StaticResource navButton}"/>
+            <Button Command="{Binding GoToAddErrandCommand}" Content="&#xf234;" Style="{StaticResource navButton}"/>
             <Button Command="{Binding GoToContactsCommand}" Content="&#xf2b9;" Style="{StaticResource navButton}"/>
             <Button Command="{Binding GoToUpdateContactCommand}" Content="&#xf4ff;" Style="{StaticResource navButton}" />
         </StackPanel>

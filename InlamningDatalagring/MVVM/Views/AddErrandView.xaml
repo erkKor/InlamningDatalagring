@@ -25,9 +25,9 @@
             <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding EmailText}"/>
             <TextBlock Text="Skriv in telefonnummer..." />
             <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding PhonenumberText}"/>
-            <TextBlock Text="Skriv in adress..." />
-            <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding AdressText}"/>
-            <Button Content="Lägg till kontakt" Margin="0 5 15 10" Padding="8" />
+            <TextBlock Text="Beskriv ditt ärende..." />
+            <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding DescriptionText}"/>
+            <Button Content="Lägg till kontakt" Margin="0 5 15 10" Padding="8" Command="{Binding AddCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

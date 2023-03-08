@@ -16,9 +16,9 @@ namespace InlamningDatalagring
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new MainWindow();
+            MainWindow = new MainWindow()
             {
-                DataContext = new MainViewModel();
+                DataContext = new MainViewModel()
             };
 
             MainWindow.Show();

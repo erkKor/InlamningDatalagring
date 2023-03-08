@@ -11,8 +11,14 @@ namespace InlamningDatalagring.MVVM.ViewModels
     public partial class MainViewModel : ObservableObject
     {
         [ObservableProperty]
-        public static ObservableObject currentViewModel = new AddErrandViewModel();
+        public static ObservableObject currentViewModel = new ErrandsViewModel();
 
-       
+        [RelayCommand]
+        private void GoToAddErrand() => CurrentViewModel = new AddErrandViewModel();
+
+        [RelayCommand]
+        private void GoToErrands() => CurrentViewModel = new ErrandsViewModel();
     }
+
+
 }
