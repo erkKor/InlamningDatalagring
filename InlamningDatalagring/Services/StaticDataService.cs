@@ -8,12 +8,13 @@ using System.Threading.Tasks;
 
 namespace InlamningDatalagring.Services
 {
-    internal class StaticDataService
+    public static class StaticDataService
     {
         public static ObservableCollection<ErrandModel> ErrandsList { get; set; } = new ObservableCollection<ErrandModel>();
 
-        public DataService DataService = new DataService();
+        public static DataService DataService = new DataService();
 
+        public static string SelectedStatus { get; set; } = null!;
         public static void SetErrandList()
         {
 

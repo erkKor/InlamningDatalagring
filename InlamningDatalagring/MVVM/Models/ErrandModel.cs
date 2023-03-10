@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InlamningDatalagring.MVVM.Models
 {
-    internal class ErrandModel
+    public class ErrandModel
     {
         public int Id { get; set; } 
         public string FirstName { get; set; } = null!;

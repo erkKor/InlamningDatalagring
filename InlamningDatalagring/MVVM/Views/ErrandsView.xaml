@@ -22,7 +22,7 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <ListView Name="lv_MyListView" Background="Transparent" ItemsSource="{Binding Errands}" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedContact}" SelectionChanged="ListView_SelectionChanged">
+            <ListView Name="lv_MyListView" Background="Transparent" ItemsSource="{Binding ErrandsList}" HorizontalContentAlignment="Stretch" SelectedItem="{Binding SelectedErrand}" SelectionChanged="lv_MyListView_SelectionChanged" >
                 <ListView.ItemTemplate>
                     <DataTemplate DataType="{x:Type models:ErrandModel}">
                         <Grid Margin="0 5 0 10">
@@ -40,19 +40,26 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <!--<StackPanel Grid.Column="1" Margin="10 0 0 0">
-                <TextBlock Text="{Binding SelectedContact.FirstName, StringFormat='Förnamn: {0}'}" Margin="0 0 0 5"/>
-                <TextBlock Text="{Binding SelectedContact.LastName, StringFormat='Efternamn: {0}'}" Margin="0 0 0 5"/>
-                <TextBlock Text="{Binding SelectedContact.Email, StringFormat='Epostadress: {0}'}" Margin="0 0 0 5"/>
-                <TextBlock Text="{Binding SelectedContact.PhoneNumber, StringFormat='Telefonnummer: {0}'}" Margin="0 0 0 5"/>
-                <TextBlock Text="{Binding SelectedContact.Adress, StringFormat='Adress: {0}'}" Margin="0 0 0 15"/>
-                <StackPanel Orientation="Horizontal">
+            <StackPanel Grid.Column="1" Margin="10 0 0 0">
+                <TextBlock Text="{Binding SelectedErrand.FirstName, StringFormat='Förnamn: {0}'}" Margin="0 0 0 5"/>
+                <TextBlock Text="{Binding SelectedErrand.LastName, StringFormat='Efternamn: {0}'}" Margin="0 0 0 5"/>
+                <TextBlock Text="{Binding SelectedErrand.Email, StringFormat='Epostadress: {0}'}" Margin="0 0 0 5"/>
+                <!--<StackPanel Orientation="Horizontal">
                     <Button x:Name="btn_RemoveBtn" Command="{Binding RemoveCommand}" Content="Ta bort" Width="75" Height="35" FontSize="14" Margin="0 0 10 0" Visibility="Hidden"/>
                     <Button x:Name="btn_EditBtn" Command="{Binding UpdateContactCommand}" Content="Uppdatera" Width="75" Height="35" FontSize="14" Visibility="Hidden"/>
                 </StackPanel>
                 <TextBlock x:Name="tb_InfoText" Margin="0 0 0 0" Padding="5 0 0 0" Width="340" Height="136" xml:space="preserve" Visibility="Hidden">
-                </TextBlock>
-            </StackPanel>-->
+                </TextBlock>-->
+                <TextBlock Text="Ärende status" FontSize="18" Margin="0 30 0 0"/>
+                <ComboBox Grid.Column="1" Name="comboBox" SelectedValuePath="Content" Margin="0 5 0 0" SelectionChanged="comboBox_SelectionChanged">
+                    <ComboBoxItem Content="Ej Påbörjad" />
+                    <ComboBoxItem Content="Pågående" />
+                    <ComboBoxItem Content="Avslutad" />
+                </ComboBox>
+                <Button Command="{Binding UpdateStatusCommand}">Uppdatera status</Button>
+            </StackPanel>
+            
+            
         </Grid>
     </Grid>
 </UserControl>

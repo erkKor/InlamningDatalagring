@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InlamningDatalagring.MVVM.Models;
+using InlamningDatalagring.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,5 +26,31 @@ namespace InlamningDatalagring.MVVM.Views
         {
             InitializeComponent();
         }
+
+        private void lv_MyListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            ErrandModel errandModel = (ErrandModel)lv_MyListView.SelectedItem;
+            if (errandModel != null) 
+            {
+                comboBox.SelectedValue = errandModel.Status;
+                StaticDataService.SelectedStatus = errandModel.Status;
+            }
+            
+        }
+
+
+
+        private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (StaticDataService.SelectedStatus != null)
+                StaticDataService.SelectedStatus = (comboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
+           
+            //test. = StaticDataService.SelectedStatus;
+            //if (StaticDataService.SelectedStatus != null)
+            //    StaticDataService.SelectedStatus = (string)comboBox.SelectedItem;
+        }
+
+     
     }
 }

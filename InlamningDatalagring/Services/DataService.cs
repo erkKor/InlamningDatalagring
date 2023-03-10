@@ -2,6 +2,7 @@
 using InlamningDatalagring.MVVM.Models;
 using InlamningDatalagring.MVVM.Models.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace InlamningDatalagring.Services
 {
-    internal class DataService
+    public class DataService
     {
         private static DataContext _context = new DataContext();
         private static ObservableCollection<ErrandModel> errands;
@@ -76,25 +77,42 @@ namespace InlamningDatalagring.Services
             return errands;
         }
 
-        //public static async Task<CustomerModel> GetAsync(string email)
-        //{
-        //    var _customer = await _context.Customers.Include(x => x.Adress).FirstOrDefaultAsync(x => x.Email == email);
-        //    if (_customer != null)
-        //        return new CustomerModel
-        //        {
-        //            Id = _customer.Id,
-        //            FirstName = _customer.FirstName,
-        //            LastName = _customer.LastName,
-        //            Email = _customer.Email,
-        //            PhoneNumber = _customer.PhoneNumber,
-        //            StreetName = _customer.Adress.StreetName,
-        //            PostalCode = _customer.Adress.PostalCode,
-        //            City = _customer.Adress.City,
-        //        };
+        public static async Task UpdateStatus(ErrandModel model, string status)
+        {   
+            //.Include(c => c.Contact).Include(s => s.Status).Include(c => c.Comments).
+            var _errand = await _context.Errands.FirstOrDefaultAsync(x => x.Id == model.Id);
+            if (_errand != null)
+            {
 
-        //    else
-        //        return null!;
-        //}
+                switch(status)
+                {
+                    case "Ej Påbörjad":
+                        _errand.StatusId = 1;
+                        _context.Update(_errand);
+                        await _context.SaveChangesAsync();
+                        break;
+                    case "Pågående":
+                        _errand.StatusId = 2;
+                        _context.Update(_errand);
+                        await _context.SaveChangesAsync();
+                        break;
+                    case "Avslutad":
+                        _errand.StatusId = 3;
+                        _context.Update(_errand);
+                        await _context.SaveChangesAsync();
+                        break;
+                }
+                    
+
+                //_errand.Status.StatusType = status;
+                //_errand.Contact = _errand.Contact;
+
+
+
+                //_context.Update(_errand);
+                //await _context.SaveChangesAsync();
+            }
+        }
 
         //public static async Task UpdateAsync(CustomerModel model)
         //{
@@ -156,6 +174,27 @@ namespace InlamningDatalagring.Services
         //}
 
 
+
+
+        //public static async Task<CustomerModel> GetAsync(string email)
+        //{
+        //    var _customer = await _context.Customers.Include(x => x.Adress).FirstOrDefaultAsync(x => x.Email == email);
+        //    if (_customer != null)
+        //        return new CustomerModel
+        //        {
+        //            Id = _customer.Id,
+        //            FirstName = _customer.FirstName,
+        //            LastName = _customer.LastName,
+        //            Email = _customer.Email,
+        //            PhoneNumber = _customer.PhoneNumber,
+        //            StreetName = _customer.Adress.StreetName,
+        //            PostalCode = _customer.Adress.PostalCode,
+        //            City = _customer.Adress.City,
+        //        };
+
+        //    else
+        //        return null!;
+        //}
 
     }
 }

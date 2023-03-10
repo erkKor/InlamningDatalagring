@@ -16,7 +16,7 @@
 
         <StackPanel Grid.Column="0">
             <Button Command="{Binding GoToAddErrandCommand}" Content="&#xf234;" Style="{StaticResource navButton}"/>
-            <Button Command="{Binding GoToContactsCommand}" Content="&#xf2b9;" Style="{StaticResource navButton}"/>
+            <Button Command="{Binding GoToErrandsCommand}" Content="&#xf2b9;" Style="{StaticResource navButton}"/>
             <Button Command="{Binding GoToUpdateContactCommand}" Content="&#xf4ff;" Style="{StaticResource navButton}" />
         </StackPanel>
 
@@ -25,10 +25,10 @@
                 <DataTemplate DataType="{x:Type viewmodels:AddErrandViewModel}">
                     <views:AddErrandView />
                 </DataTemplate>
-                <!--<DataTemplate DataType="{x:Type viewmodels:ContactsViewModel}">
-                    <views:ContactsView />
+                <DataTemplate DataType="{x:Type viewmodels:ErrandsViewModel}">
+                    <views:ErrandsView />
                 </DataTemplate>
-                <DataTemplate DataType="{x:Type viewmodels:UpdateContactViewModel}">
+                <!--<DataTemplate DataType="{x:Type viewmodels:UpdateContactViewModel}">
                     <views:UpdateContactView />
                 </DataTemplate>-->
             </ContentControl.Resources>
