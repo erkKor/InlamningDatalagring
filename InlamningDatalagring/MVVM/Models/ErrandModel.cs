@@ -17,5 +17,6 @@ namespace InlamningDatalagring.MVVM.Models
         public string TimeStamp { get; set; } = null!;
         public string Status { get; set; } = null!;
         public string Comment { get; set; } = null!;
+        public int CommentId { get; set; }
     }
 }

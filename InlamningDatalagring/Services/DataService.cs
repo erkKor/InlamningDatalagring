@@ -71,7 +71,8 @@ namespace InlamningDatalagring.Services
                     Description = _errands.Description,
                     TimeStamp = _errands.TimeStamp,
                     Status = _errands.Status.StatusType,
-                    Comment = _errands.Comments.Comment
+                    Comment = _errands.Comments.Comment,
+                    CommentId = _errands.CommentsId
                 });
             StaticDataService.ErrandsList = errands;
             return errands;
@@ -113,6 +114,20 @@ namespace InlamningDatalagring.Services
                 //await _context.SaveChangesAsync();
             }
         }
+
+
+        public async Task AddCommentAsync(string comment, int commentId)
+        {
+            var _comment = new Comments
+            {
+                Id = commentId,
+                Comment = comment
+            };
+
+            _context.Add(_comment);
+            await _context.SaveChangesAsync();
+        }
+
 
         //public static async Task UpdateAsync(CustomerModel model)
         //{

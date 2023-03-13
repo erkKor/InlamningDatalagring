@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using InlamningDatalagring.Contexts;
 using InlamningDatalagring.MVVM.Models;
+using InlamningDatalagring.MVVM.Models.Entities;
 using InlamningDatalagring.Services;
 using System;
 using System.Collections.Generic;
@@ -15,40 +16,50 @@ namespace InlamningDatalagring.MVVM.ViewModels
     public partial class ErrandsViewModel : ObservableObject
     {
         public DataService DataService = new DataService();
-        private ObservableCollection<ErrandModel> errandsList;
+
         public ErrandsViewModel()
         {
             //DataService.GetAllAsync();
             LoadCaseAsync();
         }
+        #region ErrandList
 
         [ObservableProperty]
-        private string title = "Ärenden";
-
-
+        private ObservableCollection<ErrandModel> errandsList;
         public async Task LoadCaseAsync()
         {
             ObservableCollection<ErrandModel> errands = await DataService.GetAllAsync();
             ErrandsList = new ObservableCollection<ErrandModel>(errands);
         }
-        //[ObservableProperty]
-        //private ObservableCollection<ErrandModel> errands = StaticDataService.ErrandsList;
         
-        public ObservableCollection<ErrandModel> ErrandsList
-        {
-            get { return errandsList; }
-            set { SetProperty(ref errandsList, value); }
-        }
-
+        //public ObservableCollection<ErrandModel> ErrandsList
+        //{
+        //    get { return errandsList; }
+        //    set { SetProperty(ref errandsList, value); }
+        //}
+        #endregion
 
         [ObservableProperty]
+        private string title = "Ärenden";
+        [ObservableProperty]
         private ErrandModel selectedErrand = null!;
+        [ObservableProperty]
+        private string commentText = string.Empty;
+
+        //[ObservableProperty]
+        //private ObservableCollection<ErrandModel> selectedErrandCommentsList = null!;
 
         [RelayCommand]
-        public void UpdateStatus()
+        public async void UpdateStatus()
         {
-            
-            DataService.UpdateStatus(selectedErrand, StaticDataService.SelectedStatus);
+            await DataService.UpdateStatus(SelectedErrand, StaticDataService.SelectedStatus);
+        }
+
+        [RelayCommand]
+        public async void AddComment()
+        {
+            string comment = CommentText;
+            await DataService.AddCommentAsync(comment ,SelectedErrand.CommentId);
         }
 
     }

@@ -39,8 +39,6 @@ namespace InlamningDatalagring.MVVM.Views
             
         }
 
-
-
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (StaticDataService.SelectedStatus != null)
@@ -51,6 +49,5 @@ namespace InlamningDatalagring.MVVM.Views
             //    StaticDataService.SelectedStatus = (string)comboBox.SelectedItem;
         }
 
-     
     }
 }

@@ -10,6 +10,8 @@ namespace InlamningDatalagring.MVVM.Models.Entities
     {
         public int Id { get; set; }
         public string Comment { get; set; } = null!;
+
+
         public virtual ICollection<Errand> Errands { get; } = new List<Errand>();
     }
 
