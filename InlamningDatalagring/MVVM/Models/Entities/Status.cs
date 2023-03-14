@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace InlamningDatalagring.MVVM.Models.Entities
 {
-    internal class Status
+    public class Status
     {
         public int Id { get; set; }
         public string StatusType { get; set; } = null!;

@@ -43,11 +43,11 @@ namespace InlamningDatalagring.Services
                     PhoneNumber = model.PhoneNumber,
                 };
 
-            model.Comment = "Skapat";
-            _errand.Comments = new Comments
-            {
-                Comment = model.Comment
-            };
+
+            //_errand.Comments = new Comments
+            //{
+            //    Comment = "test"
+            //};
 
             _context.Add(_errand);
             await _context.SaveChangesAsync();
@@ -71,8 +71,10 @@ namespace InlamningDatalagring.Services
                     Description = _errands.Description,
                     TimeStamp = _errands.TimeStamp,
                     Status = _errands.Status.StatusType,
-                    Comment = _errands.Comments.Comment,
-                    CommentId = _errands.CommentsId
+                    Comments = _errands.Comments,
+                    CommentId = _errands.CommentsId,
+                    ContactId = _errands.ContactId
+
                 });
             StaticDataService.ErrandsList = errands;
             return errands;
@@ -118,9 +120,17 @@ namespace InlamningDatalagring.Services
 
         public async Task AddCommentAsync(string comment, int commentId)
         {
+            var _errand = await _context.Errands.FirstOrDefaultAsync(x => x.Id == commentId);
+            if(_errand != null )
+                if(_errand.CommentsId == 0)
+                {
+                    _errand.CommentsId = commentId;
+                    _context.Update(_errand);
+                }
+            
             var _comment = new Comments
             {
-                Id = commentId,
+                ErrandId = commentId,
                 Comment = comment
             };
 

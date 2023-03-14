@@ -33,7 +33,12 @@ namespace InlamningDatalagring.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ErrandId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("ErrandId");
 
                     b.ToTable("Comments");
                 });
@@ -94,8 +99,6 @@ namespace InlamningDatalagring.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CommentsId");
-
                     b.HasIndex("ContactId");
 
                     b.HasIndex("StatusId");
@@ -120,14 +123,19 @@ namespace InlamningDatalagring.Migrations
                     b.ToTable("Status");
                 });
 
-            modelBuilder.Entity("InlamningDatalagring.MVVM.Models.Entities.Errand", b =>
+            modelBuilder.Entity("InlamningDatalagring.MVVM.Models.Entities.Comments", b =>
                 {
-                    b.HasOne("InlamningDatalagring.MVVM.Models.Entities.Comments", "Comments")
-                        .WithMany("Errands")
-                        .HasForeignKey("CommentsId")
+                    b.HasOne("InlamningDatalagring.MVVM.Models.Entities.Errand", "Errand")
+                        .WithMany("Comments")
+                        .HasForeignKey("ErrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Errand");
+                });
+
+            modelBuilder.Entity("InlamningDatalagring.MVVM.Models.Entities.Errand", b =>
+                {
                     b.HasOne("InlamningDatalagring.MVVM.Models.Entities.Contact", "Contact")
                         .WithMany("Errands")
                         .HasForeignKey("ContactId")
@@ -140,21 +148,19 @@ namespace InlamningDatalagring.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Comments");
-
                     b.Navigation("Contact");
 
                     b.Navigation("Status");
                 });
 
-            modelBuilder.Entity("InlamningDatalagring.MVVM.Models.Entities.Comments", b =>
+            modelBuilder.Entity("InlamningDatalagring.MVVM.Models.Entities.Contact", b =>
                 {
                     b.Navigation("Errands");
                 });
 
-            modelBuilder.Entity("InlamningDatalagring.MVVM.Models.Entities.Contact", b =>
+            modelBuilder.Entity("InlamningDatalagring.MVVM.Models.Entities.Errand", b =>
                 {
-                    b.Navigation("Errands");
+                    b.Navigation("Comments");
                 });
 
             modelBuilder.Entity("InlamningDatalagring.MVVM.Models.Entities.Status", b =>

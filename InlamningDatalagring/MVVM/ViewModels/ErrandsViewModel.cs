@@ -59,7 +59,8 @@ namespace InlamningDatalagring.MVVM.ViewModels
         public async void AddComment()
         {
             string comment = CommentText;
-            await DataService.AddCommentAsync(comment ,SelectedErrand.CommentId);
+            await DataService.AddCommentAsync(comment, SelectedErrand.ContactId);
+            CommentText = string.Empty;
         }
 
     }

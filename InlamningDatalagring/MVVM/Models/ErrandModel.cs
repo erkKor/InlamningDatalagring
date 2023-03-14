@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InlamningDatalagring.MVVM.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,7 +17,11 @@ namespace InlamningDatalagring.MVVM.Models
         public string Description { get; set; } = null!;
         public string TimeStamp { get; set; } = null!;
         public string Status { get; set; } = null!;
+        public ICollection<Comments> Comments { get; set; } = null!;
+        
         public string Comment { get; set; } = null!;
+
         public int CommentId { get; set; }
+        public int ContactId { get; set; }
     }
 }

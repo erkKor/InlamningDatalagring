@@ -59,15 +59,29 @@
                 </ComboBox>
                 <Button Command="{Binding UpdateStatusCommand}">Uppdatera status</Button>
 
-                <ListView Margin="0 10 0 0" ItemsSource="{Binding SelectedErrandCommentsList}">
+                <ListView Margin="0 10 0 0" ItemsSource="{Binding SelectedErrand.Comments}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type models:ErrandModel}">
+                            <Grid Margin="0 5 0 10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
 
+                                <StackPanel Grid.Column="0" HorizontalAlignment="Left">
+                                    <TextBlock Text="{Binding Comment}" FontSize="12"/>
+                                    <!--<TextBlock Text="{Binding Email}"/>-->
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
             </StackPanel>
 
             <StackPanel Grid.Column="2">
                 <TextBlock Text="{Binding SelectedErrand.CommentId, StringFormat='CommentId: {0}'}"/>
                 <TextBlock Text="Skriv kommentar..." />
-                <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding LastNameText}"/>
+                <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding CommentText}"/>
                 <Button Command="{Binding AddCommentCommand}" Content="Lägg till kommentar"/>
             </StackPanel>
             

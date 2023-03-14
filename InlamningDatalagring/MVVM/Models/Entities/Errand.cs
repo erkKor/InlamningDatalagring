@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.RightsManagement;
@@ -12,7 +13,7 @@ namespace InlamningDatalagring.MVVM.Models.Entities
     // 2. Status
     // 3. Kontaktuppgifter
     // 4. Kommentarer
-    internal class Errand
+    public class Errand
     {
         public int Id { get; set; } 
         public int ContactId { get; set; }
@@ -23,7 +24,7 @@ namespace InlamningDatalagring.MVVM.Models.Entities
 
         public virtual Contact Contact { get; set; } = null!;
         public virtual Status Status { get; set; } = null!;
-        public virtual Comments Comments { get; set; } = null!;
+        public virtual ICollection<Comments> Comments { get; set; } = new List<Comments>();
     }
 }
 

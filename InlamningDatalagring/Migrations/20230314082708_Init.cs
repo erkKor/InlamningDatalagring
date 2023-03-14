@@ -11,19 +11,6 @@ namespace InlamningDatalagring.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Comments",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Comments", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Contacts",
                 columns: table => new
                 {
@@ -68,12 +55,6 @@ namespace InlamningDatalagring.Migrations
                 {
                     table.PrimaryKey("PK_Errands", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Errands_Comments_CommentsId",
-                        column: x => x.CommentsId,
-                        principalTable: "Comments",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_Errands_Contacts_ContactId",
                         column: x => x.ContactId,
                         principalTable: "Contacts",
@@ -87,10 +68,30 @@ namespace InlamningDatalagring.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Comments",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ErrandId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Comments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Comments_Errands_ErrandId",
+                        column: x => x.ErrandId,
+                        principalTable: "Errands",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Errands_CommentsId",
-                table: "Errands",
-                column: "CommentsId");
+                name: "IX_Comments_ErrandId",
+                table: "Comments",
+                column: "ErrandId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Errands_ContactId",
@@ -107,10 +108,10 @@ namespace InlamningDatalagring.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Errands");
+                name: "Comments");
 
             migrationBuilder.DropTable(
-                name: "Comments");
+                name: "Errands");
 
             migrationBuilder.DropTable(
                 name: "Contacts");

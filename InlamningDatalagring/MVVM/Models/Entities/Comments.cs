@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace InlamningDatalagring.MVVM.Models.Entities
 {
-    internal class Comments
+    public class Comments
     {
         public int Id { get; set; }
         public string Comment { get; set; } = null!;
-
-
-        public virtual ICollection<Errand> Errands { get; } = new List<Errand>();
+        public int ErrandId { get; set; }
+        public virtual Errand Errand { get; set; } = null!;
     }
 
 }
