@@ -35,6 +35,9 @@ namespace InlamningDatalagring.MVVM.Views
             {
                 comboBox.SelectedValue = errandModel.Status;
                 StaticDataService.SelectedStatus = errandModel.Status;
+                sp_ErrandInfo.Visibility = Visibility.Visible;
+                sp_Comments.Visibility = Visibility.Visible;
+                lv_MyListView.Visibility = Visibility.Hidden;
             }
             
         }
@@ -49,5 +52,9 @@ namespace InlamningDatalagring.MVVM.Views
             //    StaticDataService.SelectedStatus = (string)comboBox.SelectedItem;
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

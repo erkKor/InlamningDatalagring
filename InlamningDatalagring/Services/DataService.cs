@@ -23,13 +23,22 @@ namespace InlamningDatalagring.Services
         }
 
         public static async Task SaveAsync(ErrandModel model)
-        {
+        {   
+
+
             var _errand = new Errand
             {
                 Description = model.Description,
                 TimeStamp = model.TimeStamp,
                 StatusId = 1,
             };
+            //if(_errand.StatusId == 0)
+            //{
+            //    new Status { StatusType = "Ej Påbörjad" };
+            //    new Status { StatusType = "Pågående" };
+            //    new Status { StatusType = "Avslutad" };
+            //    _errand.StatusId = 1;
+            //}
 
             var _contact = await _context.Contacts.FirstOrDefaultAsync(x => x.Email == model.Email);
             if (_contact != null)
@@ -43,12 +52,6 @@ namespace InlamningDatalagring.Services
                     PhoneNumber = model.PhoneNumber,
                 };
 
-
-            //_errand.Comments = new Comments
-            //{
-            //    Comment = "test"
-            //};
-
             _context.Add(_errand);
             await _context.SaveChangesAsync();
         }
@@ -60,7 +63,7 @@ namespace InlamningDatalagring.Services
         {
             errands = new ObservableCollection<ErrandModel>();
 
-            foreach (var _errands in await _context.Errands.Include(x => x.Contact).Include(s => s.Status).Include(p => p.Comments).ToListAsync())
+            foreach (var _errands in await _context.Errands.Include(x => x.Contact).Include(s => s.Status).Include(c => c.Comments).ToListAsync())
                 errands.Add(new ErrandModel
                 {
                     Id = _errands.Id,
@@ -86,7 +89,6 @@ namespace InlamningDatalagring.Services
             var _errand = await _context.Errands.FirstOrDefaultAsync(x => x.Id == model.Id);
             if (_errand != null)
             {
-
                 switch(status)
                 {
                     case "Ej Påbörjad":

@@ -13,11 +13,6 @@ namespace InlamningDatalagring.Services
         public static ObservableCollection<ErrandModel> ErrandsList { get; set; } = new ObservableCollection<ErrandModel>();
 
         public static DataService DataService = new DataService();
-
         public static string SelectedStatus { get; set; } = null!;
-        public static void SetErrandList()
-        {
-
-        }
     }
 }

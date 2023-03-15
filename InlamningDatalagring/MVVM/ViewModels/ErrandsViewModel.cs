@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using GalaSoft.MvvmLight.Messaging;
 using InlamningDatalagring.Contexts;
 using InlamningDatalagring.MVVM.Models;
 using InlamningDatalagring.MVVM.Models.Entities;
@@ -10,6 +11,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static InlamningDatalagring.MVVM.ViewModels.MainViewModel;
 
 namespace InlamningDatalagring.MVVM.ViewModels
 {
@@ -60,7 +62,16 @@ namespace InlamningDatalagring.MVVM.ViewModels
         {
             string comment = CommentText;
             await DataService.AddCommentAsync(comment, SelectedErrand.ContactId);
+            LoadCaseAsync();
             CommentText = string.Empty;
+            HomeButton();
+                
+        }
+
+        [RelayCommand]
+        public void HomeButton()
+        {
+            Messenger.Default.Send(new ChangeViewModelMessage(new AddErrandViewModel()));
         }
 
     }
