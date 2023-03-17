@@ -39,7 +39,7 @@ namespace InlamningDatalagring.MVVM.ViewModels
                 
             };
 
-            await DataService.SaveAsync(errand);
+            await DataService.AddErrandAsync(errand);
             FirstNameText = string.Empty;
             LastNameText= string.Empty;
             EmailText= string.Empty;

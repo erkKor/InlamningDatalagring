@@ -7,12 +7,9 @@
         xmlns:views="clr-namespace:InlamningDatalagring.MVVM.Views"
         xmlns:local="clr-namespace:InlamningDatalagring"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="650" Width="1000">
     <Grid>
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="auto"/>
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>-->
+
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition />
@@ -21,7 +18,6 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0 0 0 10">
             <Button Command="{Binding GoToAddErrandCommand}" Content="&#xf234;" Style="{StaticResource navButton}"/>
             <Button Command="{Binding GoToErrandsCommand}" Content="&#xf2b9;" Style="{StaticResource navButton}"/>
-            <!--<Button Command="{Binding GoToUpdateContactCommand}" Content="&#xf4ff;" Style="{StaticResource navButton}" />-->
         </StackPanel>
 
         <ContentControl Grid.Row="1" Content="{Binding CurrentViewModel}">
@@ -32,9 +28,6 @@
                 <DataTemplate DataType="{x:Type viewmodels:ErrandsViewModel}">
                     <views:ErrandsView />
                 </DataTemplate>
-                <!--<DataTemplate DataType="{x:Type viewmodels:UpdateContactViewModel}">
-                    <views:UpdateContactView />
-                </DataTemplate>-->
             </ContentControl.Resources>
         </ContentControl>
     </Grid>

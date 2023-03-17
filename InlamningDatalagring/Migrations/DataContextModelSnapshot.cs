@@ -36,6 +36,10 @@ namespace InlamningDatalagring.Migrations
                     b.Property<int>("ErrandId")
                         .HasColumnType("int");
 
+                    b.Property<string>("TimeStamp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ErrandId");
@@ -121,6 +125,23 @@ namespace InlamningDatalagring.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Status");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            StatusType = "Ej Påbörjad"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            StatusType = "Pågående"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            StatusType = "Avslutad"
+                        });
                 });
 
             modelBuilder.Entity("InlamningDatalagring.MVVM.Models.Entities.Comments", b =>

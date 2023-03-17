@@ -15,7 +15,6 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="{Binding PageTitle}" FontSize="22" FontWeight="Medium" Margin="0 0 0 20"/>
-
         <StackPanel Grid.Row="2">
             <TextBlock Text="Skriv in förnamn..." />
             <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding FirstNameText}"/>
@@ -27,7 +26,7 @@
             <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding PhonenumberText}"/>
             <TextBlock Text="Beskriv ditt ärende..." />
             <TextBox Padding="5" Margin="0 5 15 10" Text="{Binding DescriptionText}"/>
-            <Button Content="Lägg till kontakt" Margin="0 5 15 10" Padding="8" Command="{Binding AddCommand}"/>
+            <Button Content="Skapa ärende" Margin="0 5 15 10" Padding="8" Command="{Binding AddCommand}"/>
         </StackPanel>
     </Grid>
 </UserControl>

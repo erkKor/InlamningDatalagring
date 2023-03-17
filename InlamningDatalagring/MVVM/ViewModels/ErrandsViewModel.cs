@@ -21,7 +21,6 @@ namespace InlamningDatalagring.MVVM.ViewModels
 
         public ErrandsViewModel()
         {
-            //DataService.GetAllAsync();
             LoadCaseAsync();
         }
         #region ErrandList
@@ -30,17 +29,10 @@ namespace InlamningDatalagring.MVVM.ViewModels
         private ObservableCollection<ErrandModel> errandsList;
         public async Task LoadCaseAsync()
         {
-            ObservableCollection<ErrandModel> errands = await DataService.GetAllAsync();
+            ObservableCollection<ErrandModel> errands = await DataService.GetAllErrandsAsync();
             ErrandsList = new ObservableCollection<ErrandModel>(errands);
         }
-        
-        //public ObservableCollection<ErrandModel> ErrandsList
-        //{
-        //    get { return errandsList; }
-        //    set { SetProperty(ref errandsList, value); }
-        //}
         #endregion
-
         [ObservableProperty]
         private string title = "Ärenden";
         [ObservableProperty]
@@ -48,13 +40,10 @@ namespace InlamningDatalagring.MVVM.ViewModels
         [ObservableProperty]
         private string commentText = string.Empty;
 
-        //[ObservableProperty]
-        //private ObservableCollection<ErrandModel> selectedErrandCommentsList = null!;
-
         [RelayCommand]
         public async void UpdateStatus()
         {
-            await DataService.UpdateStatus(SelectedErrand, StaticDataService.SelectedStatus);
+            await DataService.UpdateStatusAsync(SelectedErrand, StaticDataService.SelectedStatus);
         }
 
         [RelayCommand]
@@ -62,17 +51,14 @@ namespace InlamningDatalagring.MVVM.ViewModels
         {
             string comment = CommentText;
             await DataService.AddCommentAsync(comment, SelectedErrand.ContactId);
-            LoadCaseAsync();
+            await LoadCaseAsync();
             CommentText = string.Empty;
-            HomeButton();
-                
         }
 
-        [RelayCommand]
-        public void HomeButton()
-        {
-            Messenger.Default.Send(new ChangeViewModelMessage(new AddErrandViewModel()));
-        }
-
+        //[RelayCommand]
+        //public void HomeButton()
+        //{
+        //    Messenger.Default.Send(new ChangeViewModelMessage(new AddErrandViewModel()));
+        //}
     }
 }

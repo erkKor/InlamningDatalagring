@@ -39,22 +39,12 @@ namespace InlamningDatalagring.MVVM.Views
                 sp_Comments.Visibility = Visibility.Visible;
                 lv_MyListView.Visibility = Visibility.Hidden;
             }
-            
         }
 
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (StaticDataService.SelectedStatus != null)
-                StaticDataService.SelectedStatus = (comboBox.SelectedItem as ComboBoxItem)?.Content?.ToString();
-           
-            //test. = StaticDataService.SelectedStatus;
-            //if (StaticDataService.SelectedStatus != null)
-            //    StaticDataService.SelectedStatus = (string)comboBox.SelectedItem;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
+                StaticDataService.SelectedStatus = (comboBox.SelectedItem as ComboBoxItem).Content.ToString();
         }
     }
 }

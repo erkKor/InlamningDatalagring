@@ -2,6 +2,8 @@
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace InlamningDatalagring.Migrations
 {
     /// <inheritdoc />
@@ -75,7 +77,8 @@ namespace InlamningDatalagring.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Comment = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ErrandId = table.Column<int>(type: "int", nullable: false)
+                    ErrandId = table.Column<int>(type: "int", nullable: false),
+                    TimeStamp = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,6 +89,16 @@ namespace InlamningDatalagring.Migrations
                         principalTable: "Errands",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "Status",
+                columns: new[] { "Id", "StatusType" },
+                values: new object[,]
+                {
+                    { 1, "Ej Påbörjad" },
+                    { 2, "Pågående" },
+                    { 3, "Avslutad" }
                 });
 
             migrationBuilder.CreateIndex(

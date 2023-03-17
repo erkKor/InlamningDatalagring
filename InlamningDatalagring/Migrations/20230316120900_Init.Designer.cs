@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InlamningDatalagring.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230314082708_Init")]
+    [Migration("20230316120900_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -38,6 +38,10 @@ namespace InlamningDatalagring.Migrations
 
                     b.Property<int>("ErrandId")
                         .HasColumnType("int");
+
+                    b.Property<string>("TimeStamp")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -124,6 +128,23 @@ namespace InlamningDatalagring.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Status");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            StatusType = "Ej Påbörjad"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            StatusType = "Pågående"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            StatusType = "Avslutad"
+                        });
                 });
 
             modelBuilder.Entity("InlamningDatalagring.MVVM.Models.Entities.Comments", b =>

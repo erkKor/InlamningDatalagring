@@ -11,6 +11,7 @@ namespace InlamningDatalagring.MVVM.Models.Entities
         public int Id { get; set; }
         public string Comment { get; set; } = null!;
         public int ErrandId { get; set; }
+        public string TimeStamp { get; set; } = null!;
         public virtual Errand Errand { get; set; } = null!;
     }
 

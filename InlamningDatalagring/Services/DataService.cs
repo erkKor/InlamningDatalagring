@@ -22,23 +22,14 @@ namespace InlamningDatalagring.Services
             _context = new DataContext();
         }
 
-        public static async Task SaveAsync(ErrandModel model)
+        public static async Task AddErrandAsync(ErrandModel model)
         {   
-
-
             var _errand = new Errand
             {
                 Description = model.Description,
                 TimeStamp = model.TimeStamp,
                 StatusId = 1,
             };
-            //if(_errand.StatusId == 0)
-            //{
-            //    new Status { StatusType = "Ej Påbörjad" };
-            //    new Status { StatusType = "Pågående" };
-            //    new Status { StatusType = "Avslutad" };
-            //    _errand.StatusId = 1;
-            //}
 
             var _contact = await _context.Contacts.FirstOrDefaultAsync(x => x.Email == model.Email);
             if (_contact != null)
@@ -59,7 +50,7 @@ namespace InlamningDatalagring.Services
 
 
 
-        public static async Task<ObservableCollection<ErrandModel>> GetAllAsync()
+        public static async Task<ObservableCollection<ErrandModel>> GetAllErrandsAsync()
         {
             errands = new ObservableCollection<ErrandModel>();
 
@@ -83,9 +74,8 @@ namespace InlamningDatalagring.Services
             return errands;
         }
 
-        public static async Task UpdateStatus(ErrandModel model, string status)
+        public static async Task UpdateStatusAsync(ErrandModel model, string status)
         {   
-            //.Include(c => c.Contact).Include(s => s.Status).Include(c => c.Comments).
             var _errand = await _context.Errands.FirstOrDefaultAsync(x => x.Id == model.Id);
             if (_errand != null)
             {
@@ -107,15 +97,6 @@ namespace InlamningDatalagring.Services
                         await _context.SaveChangesAsync();
                         break;
                 }
-                    
-
-                //_errand.Status.StatusType = status;
-                //_errand.Contact = _errand.Contact;
-
-
-
-                //_context.Update(_errand);
-                //await _context.SaveChangesAsync();
             }
         }
 
@@ -123,105 +104,23 @@ namespace InlamningDatalagring.Services
         public async Task AddCommentAsync(string comment, int commentId)
         {
             var _errand = await _context.Errands.FirstOrDefaultAsync(x => x.Id == commentId);
-            if(_errand != null )
-                if(_errand.CommentsId == 0)
+            if (_errand != null)
+                if (_errand.CommentsId == 0)
                 {
                     _errand.CommentsId = commentId;
                     _context.Update(_errand);
                 }
-            
+
             var _comment = new Comments
             {
                 ErrandId = commentId,
-                Comment = comment
+                Comment = comment,
+                TimeStamp = DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm")
             };
 
             _context.Add(_comment);
             await _context.SaveChangesAsync();
         }
-
-
-        //public static async Task UpdateAsync(CustomerModel model)
-        //{
-        //    var _customer = await _context.Customers.Include(x => x.Adress).FirstOrDefaultAsync(x => x.Id == model.Id);
-        //    if (_customer != null)
-        //    {
-        //        if (!string.IsNullOrEmpty(model.StreetName) || !string.IsNullOrEmpty(model.PostalCode) || !string.IsNullOrEmpty(model.City))
-        //        {
-        //            var _adress = await _context.Adresses.FirstOrDefaultAsync(x => x.StreetName == model.StreetName && x.PostalCode == model.PostalCode && x.City == model.City);
-        //            if (_adress != null)
-        //                _customer.AdressId = _adress.Id;
-        //            else
-        //            {
-        //                var adress = new Adress
-        //                {
-        //                    StreetName = model.StreetName,
-        //                    PostalCode = model.PostalCode,
-        //                    City = model.City,
-        //                };
-        //                _context.Add(adress);
-        //                await _context.SaveChangesAsync();
-
-        //                _customer.AdressId = adress.Id;
-        //            }
-
-        //        }
-
-
-
-        //        if (!string.IsNullOrEmpty(model.FirstName))
-        //            _customer.FirstName = model.FirstName;
-
-        //        if (!string.IsNullOrEmpty(model.LastName))
-        //            _customer.LastName = model.LastName;
-
-        //        if (!string.IsNullOrEmpty(model.Email))
-        //            _customer.Email = model.Email;
-
-        //        if (!string.IsNullOrEmpty(model.PhoneNumber))
-        //            _customer.PhoneNumber = model.PhoneNumber;
-
-
-
-
-        //        _context.Update(_customer);
-        //        await _context.SaveChangesAsync();
-        //    }
-        //}
-
-
-        //public static async Task DeleteAsync(string email)
-        //{
-        //    var customer = await _context.Customers.Include(x => x.Adress).FirstOrDefaultAsync(x => x.Email == email);
-        //    if (customer != null)
-        //    {
-        //        _context.Remove(customer);
-        //        await _context.SaveChangesAsync();
-        //    }
-        //}
-
-
-
-
-        //public static async Task<CustomerModel> GetAsync(string email)
-        //{
-        //    var _customer = await _context.Customers.Include(x => x.Adress).FirstOrDefaultAsync(x => x.Email == email);
-        //    if (_customer != null)
-        //        return new CustomerModel
-        //        {
-        //            Id = _customer.Id,
-        //            FirstName = _customer.FirstName,
-        //            LastName = _customer.LastName,
-        //            Email = _customer.Email,
-        //            PhoneNumber = _customer.PhoneNumber,
-        //            StreetName = _customer.Adress.StreetName,
-        //            PostalCode = _customer.Adress.PostalCode,
-        //            City = _customer.Adress.City,
-        //        };
-
-        //    else
-        //        return null!;
-        //}
 
     }
 }
